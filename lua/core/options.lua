@@ -16,8 +16,8 @@ local options = {
   splitright = true,                               -- force all vertical splits to go to the right of current window
   swapfile = false,                                -- creates a swapfile
   termguicolors = true,                            -- set term gui colors (most terminals support this)
-  undofile = false,                                 -- enable persistent undo
-  timeoutlen = 300,                               -- time to wait for a mapped sequence to complete (in milliseconds)
+  undofile = false,                                -- enable persistent undo
+  timeoutlen = 300,                                -- time to wait for a mapped sequence to complete (in milliseconds)
   -- updatetime = 50,                                 -- faster completion (4000ms default)
   writebackup = false,                             -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                                -- convert tabs to spaces
@@ -38,5 +38,17 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.api.nvim_command("autocmd RecordingEnter * set cmdheight=1")
-vim.api.nvim_command("autocmd RecordingLeave * set cmdheight=0")
+-- vim.api.nvim_command("autocmd RecordingEnter * set cmdheight=1")
+-- vim.api.nvim_command("autocmd RecordingLeave * set cmdheight=0")
+
+vim.api.nvim_create_autocmd("RecordingEnter", {
+  callback = function()
+    vim.opt.cmdheight = 1
+  end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+  callback = function()
+    vim.opt.cmdheight = 0
+  end,
+})

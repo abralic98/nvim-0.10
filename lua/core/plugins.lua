@@ -98,8 +98,15 @@ local plugins = {
     config = function()
       require("flutter-tools").setup {}
     end,
-  }
-
+  },
+  --JAVA
+  {
+    'nvim-java/nvim-java',
+    config = function()
+      -- This will set up the plugin
+      require('java').setup()
+    end
+  },
 }
 
 local opts = {}
